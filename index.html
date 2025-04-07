@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>С Днём Рождения!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Pacifico&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Marck+Script&family=Shantell+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">   
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Анимация появления элементов письма */
+        .letter-content > * {
+            opacity: 0;
+            transform: translateY(15px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        
+        .letter-content > *.element-shown {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div id="particles-js" class="particles-background"></div>
+
+    <div class="mail-wrapper" id="mailWrapper" onclick="openLetter()">
+        <svg class="svg-heart" viewBox="0 0 24 24" width="40" height="40">
+            <path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z" 
+            fill="#ff2e2e" />
+        </svg>
+    </div>
+
+    <div class="letter" id="letter">
+        <div class="letter-content">
+            <div class="birthday-top-decoration">
+                <svg class="top-sparkle" width="25" height="25" viewBox="0 0 24 24">
+                    <path d="M12,2L14.5,9H22L16,14L18,21L12,17L6,21L8,14L2,9H9.5L12,2Z" fill="#FFD700">
+                        <animate attributeName="opacity" values="0.7;1;0.7" dur="2s" repeatCount="indefinite" />
+                    </path>
+                </svg>
+                <span class="confetti-icon">🎉</span>
+            </div>
+            
+            <h1 class="greeting-title">С Днём Рождения!!!</h1>
+            
+            <div class="birthday-message-container">
+                <div class="message-card">
+                    <p class="animated-text"><span class="text-name">Лиза</span> <span class="special-word">поздравляю</span> тебя с твоим особенным днём! <span class="emoji-accent">✨</span></p>
+                    <p class="animated-text">Пусть этот день будет наполнен <span class="special-word">радостью</span>, <span class="special-word">счастьем</span> и <span class="special-word">волшебством</span>!</p>
+                    <p class="animated-text">Желаю, чтобы каждое твоё <span class="special-word">мгновение</span> было наполнено <span class="special-word">волшебством</span> и <span class="special-word">улыбками</span>!</p>
+                    <p class="animated-text highlight-message">Ты <span class="magic-text">✨ невероятная ✨</span> и заслуживаешь только самого лучшего!</p>
+                    <p class="animated-text"><span class="magic-text">От Марика</span></p>
+                </div>
+            </div>
+                </div>
+            </div>
+            
+            <!-- Декоративные летающие элементы -->
+            <div class="floating-elements">
+                <!-- Первая звезда -->
+                <svg class="floating-star" width="20" height="20" viewBox="0 0 24 24" style="left: 15%; top: 20%;">
+                    <path d="M12,2L14.5,9H22L16,14L18,21L12,17L6,21L8,14L2,9H9.5L12,2Z" fill="#FFD700" />
+                </svg>
+                
+                <!-- Вторая звезда -->
+                <svg class="floating-star" width="15" height="15" viewBox="0 0 24 24" style="right: 10%; top: 35%;">
+                    <path d="M12,2L14.5,9H22L16,14L18,21L12,17L6,21L8,14L2,9H9.5L12,2Z" fill="#FF69B4" />
+                </svg>
+                
+                <!-- Третья звезда -->
+                <svg class="floating-star" width="12" height="12" viewBox="0 0 24 24" style="left: 25%; bottom: 25%;">
+                    <path d="M12,2L14.5,9H22L16,14L18,21L12,17L6,21L8,14L2,9H9.5L12,2Z" fill="#87CEFA" />
+                </svg>
+                
+                <!-- Сердечко -->
+                <svg class="floating-heart" width="15" height="15" viewBox="0 0 24 24" style="right: 15%; bottom: 30%;">
+                    <path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z" fill="#FF1493" />
+                </svg>
+                
+                <!-- Круг с градиентом -->
+                <div class="floating-circle" style="left: 80%; top: 15%;"></div>
+                
+                <!-- Маленький круг -->
+                <div class="floating-circle small" style="left: 5%; bottom: 20%;"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="heart-rain" id="heartRain"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="script.js"></script>
+
+</body>
+</html>

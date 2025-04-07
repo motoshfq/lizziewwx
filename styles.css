@@ -1,0 +1,1284 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+  position: relative;
+  z-index: 1;
+  background: linear-gradient(to bottom, #0A0026, #1B054E); /* Градиент фона на случай, если particles не загрузится */
+}
+.mail-wrapper {
+  position: relative;
+  width: 180px;
+  height: 180px;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  margin: 0 auto;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.mail-wrapper:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+}
+.mail-wrapper:active {
+  transform: scale(0.97);
+}
+.heart-wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+.svg-heart {
+  width: 100px;
+  height: 100px;
+  fill: #ff2e2e;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+  transition: transform 0.3s ease;
+}
+.mail-wrapper:hover .svg-heart {
+  transform: scale(1.1);
+}
+.heart {
+  display: none;
+}
+.letter {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  width: 320px;
+  max-width: 90vw;
+  max-height: 85vh;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  overflow: auto;
+  transition: all 0.4s ease;
+}
+.letter.show {
+  display: flex;
+  animation: simple-appear 0.5s forwards;
+}
+@keyframes simple-appear {
+  0% { opacity: 0; transform: translate(-50%, -50%) scale(0.9); }
+  100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+.letter-content {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(255,242,247,0.9) 100%);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: inset 0 0 15px rgba(255, 20, 147, 0.1);
+}
+.letter h2 {
+  font-family: 'Pacifico', cursive;
+  color: #ff0080;
+  font-size: 24px;
+  text-align: center;
+  margin-bottom: 0;
+  text-shadow: 0 0 10px rgba(255, 0, 128, 0.3);
+}
+.letter p {
+  font-size: 16px;
+  color: #333;
+  text-align: center;
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+.letter .signature {
+  font-family: 'Dancing Script', cursive;
+  font-size: 24px;
+  color: #ff0080;
+  text-align: right;
+  width: 100%;
+  margin-top: 20px;
+}
+.heart-rain {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+.heart-rain span {
+  position: absolute;
+  bottom: 100%;
+  font-size: 24px;
+  opacity: 0.8;
+  animation: fall linear infinite;
+  will-change: transform;
+}
+@keyframes fall {
+  0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+}
+.name-container {
+  position: relative;
+  width: 100%;
+  height: 60px;
+  margin: 5px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.letter-mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: white;
+  pointer-events: none;
+}
+.birthday-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2px;
+  white-space: nowrap;
+}
+.birthday-title {
+  font-family: 'Pacifico', cursive;
+  color: #FF1493;
+  font-size: 24px;
+  margin: 0 5px;
+  text-shadow: 0 0 10px rgba(255, 20, 147, 0.5);
+  white-space: nowrap;
+}
+.party-popper, .sparkle {
+  font-size: 18px;
+  transform-origin: center;
+  white-space: nowrap;
+}
+.balloon-container {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin: 2px 0;
+}
+.balloon {
+  font-size: 24px;
+  animation: floatBalloon 3s ease-in-out infinite alternate;
+  transform-origin: bottom center;
+}
+.balloon:nth-child(2) {
+  animation-delay: 0.3s;
+}
+.balloon:nth-child(3) {
+  animation-delay: 0.6s;
+}
+@keyframes floatBalloon {
+  0% { transform: translateY(0) rotate(-5deg); }
+  100% { transform: translateY(-15px) rotate(5deg); }
+}
+.birthday-message {
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 12px;
+  padding: 10px;
+  margin: 10px 0;
+  box-shadow: 0 0 15px rgba(255, 20, 147, 0.2);
+}
+.wish-text {
+  font-family: 'Arial', sans-serif;
+  font-size: 14px;
+  color: #333;
+  margin-bottom: 6px;
+  line-height: 1.4;
+  text-align: center;
+}
+.wish-text.highlight {
+  font-weight: bold;
+  font-size: 16px;
+  color: #FF1493;
+}
+.cake-container, .cake, .gift-container, .gift, .letter-mask {
+  display: none;
+}
+.signature {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  width: 100%;
+  margin-top: 10px;
+  position: relative;
+}
+.signature-line {
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(to right, transparent, #FF1493, transparent);
+  margin-bottom: 8px;
+}
+.from-name {
+  font-family: 'Pacifico', cursive;
+  font-size: 28px;
+  color: #FF1493;
+  margin-top: 0;
+  position: relative;
+  overflow: hidden;
+}
+.from-name::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: #FF1493;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.5s ease;
+}
+.from-name:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+/* Медиа-запросы для адаптивности */
+@media (max-height: 700px) {
+  .name-text {
+      font-size: 40px;
+  }
+  
+  .birthday-title {
+      font-size: 22px;
+  }
+  
+  .balloon {
+      font-size: 22px;
+  }
+  
+  .wish-text {
+      font-size: 13px;
+      margin-bottom: 5px;
+  }
+  
+  .signature {
+      margin-top: 10px;
+  }
+  
+  .from-name {
+      font-size: 28px;
+  }
+}
+@media (max-height: 550px) {
+  .letter {
+      padding: 10px;
+  }
+  
+  .name-text {
+      font-size: 36px;
+  }
+  
+  .birthday-title {
+      font-size: 20px;
+  }
+  
+  .balloon-container {
+      margin: 0;
+  }
+  
+  .balloon {
+      font-size: 18px;
+  }
+  
+  .birthday-message {
+      padding: 8px;
+      margin: 8px 0;
+  }
+  
+  .wish-text {
+      font-size: 12px;
+      margin-bottom: 4px;
+  }
+  
+  .wish-text.highlight {
+      font-size: 14px;
+  }
+  
+  .from-name {
+      font-size: 22px;
+  }
+}
+@media (max-width: 400px) {
+  .name-text {
+      font-size: 28px;
+  }
+  
+  .birthday-title {
+      font-size: 16px;
+      white-space: nowrap;
+      display: inline-block;
+  }
+  
+  .party-popper, .sparkle {
+      font-size: 14px;
+  }
+  
+  .balloon {
+      font-size: 14px;
+  }
+  
+  .wish-text {
+      font-size: 10px;
+      margin-bottom: 2px;
+  }
+  
+  .wish-text.highlight {
+      font-size: 12px;
+  }
+  
+  .from-name {
+      font-size: 18px;
+  }
+}
+.svg-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  border: none; /* Убираем границу у объекта */
+}
+
+/* Заменяем SVG фон на particles.js */
+.particles-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  background: linear-gradient(135deg, #0A0026 0%, #1B054E 40%, #301D70 70%, #43277A 100%);
+  background-size: 300% 300%;
+  animation: gradientShift 20s ease infinite;
+}
+
+/* Обновляем стили для letter-анимации */
+@keyframes simple-appear {
+  0% { opacity: 0; transform: translate(-50%, -50%) scale(0.9); }
+  100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+/* Удаляем устаревшие стили */
+.heart-container, 
+.envelope-lid, 
+.envelope-lid::before, 
+.envelope-lid::after, 
+.heart-pulse, 
+.mail-wrapper::before, 
+.mail-wrapper:hover .heart-container, 
+.paper-texture,
+.mail-wrapper:after {
+  display: none !important;
+}
+
+.hearts-group {
+  transform-origin: center;
+  animation: slow-spin 60s linear infinite;
+}
+
+.particles {
+  animation: float 20s ease-in-out infinite alternate;
+}
+
+.particle {
+  filter: blur(1px);
+}
+
+.decorative-lines {
+  transform-origin: center;
+  animation: subtle-rotate 80s linear infinite;
+}
+
+@keyframes slow-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes float {
+  0% { transform: translateY(0) translateX(0); }
+  25% { transform: translateY(-2px) translateX(1px); }
+  50% { transform: translateY(1px) translateX(-1px); }
+  75% { transform: translateY(-1px) translateX(-2px); }
+  100% { transform: translateY(2px) translateX(2px); }
+}
+
+@keyframes subtle-rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(5deg); }
+}
+
+.sparkle-svg {
+  filter: drop-shadow(0 0 3px rgba(255, 215, 0, 0.7));
+}
+
+.balloon-svg {
+  filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.3));
+  margin: 0 6px;
+}
+
+.mail-wrapper.hide {
+  display: none;
+}
+
+/* Удаляем устаревшие стили */
+.signature-line {
+  display: none;
+}
+
+.balloon {
+  display: none;
+}
+
+/* Стили для адаптивности SVG */
+@media (max-width: 400px) {
+  .sparkle-svg, .party-popper {
+    width: 18px;
+    height: 18px;
+  }
+  
+  .balloon-svg {
+    width: 24px;
+    height: 32px;
+  }
+}
+
+@keyframes floatEnvelope {
+  0% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(-10px) rotate(-2deg); }
+  50% { transform: translateY(0) rotate(0deg); }
+  75% { transform: translateY(-6px) rotate(2deg); }
+  100% { transform: translateY(0) rotate(0deg); }
+}
+
+@keyframes tiltBounce {
+  0% { transform: rotate(0deg) scale(1); }
+  25% { transform: rotate(-5deg) scale(1.05); }
+  50% { transform: rotate(5deg) scale(1); }
+  75% { transform: rotate(-3deg) scale(1.03); }
+  100% { transform: rotate(0deg) scale(1); }
+}
+
+.decorative-elements {
+  animation: float-opposite 25s ease-in-out infinite alternate;
+}
+
+@keyframes float-opposite {
+  0% { transform: translateY(0) translateX(0); }
+  25% { transform: translateY(2px) translateX(-1px); }
+  50% { transform: translateY(-1px) translateX(1px); }
+  75% { transform: translateY(1px) translateX(2px); }
+  100% { transform: translateY(-2px) translateX(-2px); }
+}
+
+/* Анимации для фоновых элементов */
+/* Можно оставить пустыми, так как будем использовать particles.js */
+@keyframes pulse-glow {
+  0% { opacity: 0.05; }
+  50% { opacity: 0.15; }
+  100% { opacity: 0.05; }
+}
+
+@keyframes slight-drift {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(1px, 1px); }
+  50% { transform: translate(0, 2px); }
+  75% { transform: translate(-1px, 1px); }
+  100% { transform: translate(0, 0); }
+}
+
+@keyframes slow-rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes float-around {
+  0% { transform: translate(0, 0); }
+  33% { transform: translate(2px, -2px); }
+  66% { transform: translate(-2px, 2px); }
+  100% { rm: translate(0, 0); }
+}
+
+@keyframes fade-pulse {
+  0% { opacity: 0.1; }
+  50% { opacity: 0.25; }
+  100% { opacity: 0.1; }
+}
+
+@keyframes glow-drift {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(-5px, 2px); }
+  50% { transform: translate(2px, 4px); }
+  75% { transform: translate(4px, -2px); }
+  100% { transform: translate(0, 0); }
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes letterAppear {
+  0% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+  100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+/* Текстура бумаги */
+.paper-texture {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='0.1'/%3E%3C/svg%3E");
+  opacity: 0.5;
+  pointer-events: none;
+  z-index: 4;
+}
+
+/* Сияющий эффект для конверта */
+@keyframes shine {
+  0% {
+    background-position: -100% 0;
+  }
+  25%, 100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Удаляем устаревшие стили и анимации */
+@keyframes heartbeat {
+  /* пустой блок */
+}
+@keyframes pulse-ring {
+  /* пустой блок */
+}
+@keyframes floatEnvelope {
+  /* пустой блок */
+}
+@keyframes tiltBounce {
+  /* пустой блок */
+}
+
+/* Удаляем все устаревшие стили элементов конверта */
+.envelope-back,
+.envelope-sides,
+.envelope-flap,
+.envelope-content,
+.heart-wrapper,
+.envelope-lid,
+.heart-pulse,
+.paper-texture {
+  display: none !important;
+}
+
+/* Верхнее украшение */
+.birthday-top-decoration {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  position: relative;
+  padding: 0 20px;
+  margin-bottom: 5px;
+}
+
+.top-sparkle {
+  filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.7));
+  animation: float-slow 3s ease-in-out infinite alternate;
+}
+
+.confetti-icon {
+  font-size: 25px;
+  filter: drop-shadow(0 0 2px rgba(0,0,0,0.2));
+  animation: bounce 2s ease infinite;
+}
+
+/* Подсветка имени */
+.name-spotlight {
+  position: relative;
+}
+
+
+
+.name-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(ellipse at center, rgba(255,105,180,0.3) 0%, rgba(255,105,180,0) 70%);
+  filter: blur(10px);
+  z-index: 1;
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+/* Воздушные шары */
+.decorative-balloons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin: 5px 0 15px 0;
+}
+
+.balloon-svg {
+  filter: drop-shadow(0 3px 5px rgba(0, 0, 0, 0.2));
+  margin: 0 5px;
+  transform-origin: bottom center;
+}
+
+/* Карточка сообщения */
+.birthday-message-container {
+  width: 100%;
+  padding: 0 10px;
+  margin: 5px 0 15px 0;
+}
+
+.message-card {
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 15px;
+  padding: 15px;
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.message-card p {
+  font-family: "Shantell Sans", cursive;
+  font-size: 13.5px;
+  color: #333;
+  margin-bottom: 8px;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.highlight-message {
+  font-weight: bold;
+  font-size: 16px;
+  color: #FF1493;
+  text-align: center;
+  margin-top: 10px;
+  position: relative;
+  display: inline-block;
+}
+
+.emoji-accent {
+  font-size: 16px;
+  display: inline-block;
+  animation: wiggle 2s ease-in-out infinite;
+}
+
+/* Подпись */
+.signature-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding: 0 15px;
+  margin-top: 10px;
+  position: relative;
+}
+
+.signature-wave {
+  margin-bottom: 8px;
+  overflow: visible;
+  animation: wave 8s linear infinite;
+}
+
+.signature-name {
+  font-family: 'Dancing Script', cursive;
+  font-size: 32px;
+  color: #FF1493;
+  position: relative;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+  padding-right: 5px;
+}
+
+.signature-name::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #FF1493, transparent);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.5s ease;
+}
+
+.signature-name:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Анимации */
+@keyframes float-slow {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-5px); }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+@keyframes pulse-light {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.05); }
+}
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(10deg); }
+  75% { transform: rotate(-10deg); }
+}
+
+@keyframes wave {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Медиа-запросы для адаптивности */
+@media (max-height: 700px) {
+  .greeting-title {
+    font-size: 24px;
+  }
+  
+  .name-text {
+    font-size: 46px;
+  }
+  
+  .message-card p {
+    font-size: 13px;
+    margin-bottom: 6px;
+  }
+  
+  .highlight-message {
+    font-size: 15px;
+  }
+  
+  .signature-name {
+    font-size: 28px;
+  }
+}
+
+@media (max-height: 550px) {
+  .letter {
+    padding: 10px;
+  }
+  
+  .greeting-title {
+    font-size: 22px;
+  }
+  
+  .name-text {
+    font-size: 40px;
+  }
+  
+  .decorative-balloons {
+    margin: 0 0 10px 0;
+  }
+  
+  .message-card {
+    padding: 10px;
+  }
+  
+  .message-card p {
+    font-size: 12px;
+    margin-bottom: 4px;
+  }
+  
+  .highlight-message {
+    font-size: 14px;
+  }
+  
+  .signature-name {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 400px) {
+  .greeting-title {
+    font-size: 20px;
+  }
+  
+  .name-text {
+    font-size: 36px;
+  }
+  
+  .balloon-svg {
+    width: 25px;
+    height: 35px;
+  }
+  
+  .message-card p {
+    font-size: 11px;
+  }
+  
+  .highlight-message {
+    font-size: 13px;
+  }
+  
+  .signature-name {
+    font-size: 22px;
+  }
+}
+
+/* Удаляю стили для воздушных шаров, так как они больше не нужны */
+.decorative-balloons, .balloon-svg {
+  display: none;
+}
+
+/* Новые стили для анимированного текста */
+.animated-text {
+  color: #333;
+  margin-bottom: 10px;
+  line-height: 1.5;
+  text-align: center;
+  position: relative;
+}
+
+.animated-text:hover {
+  transform: translateY(-2px);
+}
+
+.text-name {
+  font-family: "Shantell Sans", cursive;
+  font-size: 15px;
+  color: #FF1493; 
+  text-align: center;
+  position: relative;
+  animation: pulseTitle 3s ease-in-out infinite;
+  transform-origin: center;
+}
+
+.special-word {
+  font-family: "Shantell Sans", cursive;
+  font-size: 13.5px;
+  display: inline-block;
+  color: #FF1493;
+  font-weight: 600;
+  position: relative;
+  transition: all 0.3s ease;
+  padding: 0 2px;
+}
+
+.special-word:hover {
+  transform: scale(1.1);
+  text-shadow: 0 0 8px rgba(255, 20, 147, 0.4);
+}
+
+.special-word::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #FF1493, transparent);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.5s ease;
+}
+
+.special-word:hover::after {
+  transform: scaleX(1);
+}
+
+.magic-text {
+  background: linear-gradient(45deg, #FF1493, #FF69B4, #FFB6C1, #FF1493);
+  background-size: 300% 300%;
+  animation: gradientFlow 3s ease infinite;
+  font-weight: 700;
+  padding: 0 5px;
+  border-radius: 4px;
+  color: white;
+  box-shadow: 0 2px 5px rgba(255, 20, 147, 0.3);
+  transition: all 0.3s ease;
+}
+
+.magic-text:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(255, 20, 147, 0.5);
+}
+
+@keyframes gradientFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Улучшаю стили карточки сообщения */
+.message-card {
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  overflow: hidden;
+}
+
+.message-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(ellipse at center, rgba(255, 105, 180, 0.05) 0%, rgba(255, 255, 255, 0) 70%);
+  transform: rotate(30deg);
+  pointer-events: none;
+  z-index: -1;
+  animation: shimmer 10s infinite linear;
+}
+
+.message-card:hover {
+  transform: translateY(-8px) rotate(1deg);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.message-card:active {
+  transform: translateY(-4px) rotate(0.5deg);
+}
+
+@keyframes shimmer {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Улучшаю стили для заголовка поздравления */
+.greeting-title {
+  font-family: "Caveat";
+  font-optical-sizing: auto;
+  font-weight: 100;
+  font-style: normal;
+  font-size: 50px;
+  background: linear-gradient(45deg, #FF1493, #FF69B4);
+  background-clip: text;
+  color: transparent;
+  text-align: center;
+  position: relative;
+  text-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  filter: drop-shadow(0 0 2px rgba(255, 20, 147, 0.5));
+  animation: pulseTitle 3s ease-in-out infinite;
+  transform-origin: center;
+}
+
+@keyframes pulseTitle {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.9; transform: scale(1.03); }
+}
+
+/* Улучшаю анимацию для подсветки имени */
+.name-spotlight {
+  position: relative;
+  animation: floatSpotlight 5s ease-in-out infinite alternate;
+}
+
+@keyframes floatSpotlight {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-5px); }
+}
+
+.name-text {
+  font-family: 'Dancing Script', cursive;
+  font-size: 60px;
+  background: linear-gradient(45deg, #FF1493, #FF69B4, #FFB6C1);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin: 0;
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  animation: gradientShiftName 8s ease infinite;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+@keyframes gradientShiftName {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.name-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(ellipse at center, rgba(255,105,180,0.3) 0%, rgba(255,105,180,0) 70%);
+  filter: blur(10px);
+  z-index: 1;
+  animation: pulseGlowStrong 3s ease-in-out infinite;
+}
+
+@keyframes pulseGlowStrong {
+  0%, 100% { opacity: 0.4; transform: scale(0.95); }
+  50% { opacity: 0.8; transform: scale(1.1); }
+}
+
+/* Улучшаю анимацию для иконки конфетти */
+.confetti-icon {
+  font-size: 28px;
+  filter: drop-shadow(0 0 3px rgba(0,0,0,0.2));
+  animation: spinBounce 3s ease infinite;
+  transform-origin: center;
+}
+
+@keyframes spinBounce {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(-8px) rotate(15deg); }
+  50% { transform: translateY(0) rotate(0deg); }
+  75% { transform: translateY(-5px) rotate(-15deg); }
+}
+
+/* Улучшаю анимацию для sparkle */
+.top-sparkle {
+  filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.7));
+  animation: sparkleFloat 3s ease-in-out infinite alternate;
+  transform-origin: center;
+}
+
+@keyframes sparkleFloat {
+  0% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(15deg); }
+  100% { transform: translateY(0) rotate(0deg); }
+}
+
+/* Стили для highlight-message */
+.highlight-message {
+  font-weight: bold;
+  font-size: 18px;
+  color: #333;
+  text-align: center;
+  margin-top: 15px;
+  position: relative;
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  animation: pulseMessage 2s infinite alternate;
+}
+
+@keyframes pulseMessage {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.05); }
+}
+
+/* Улучшаю анимацию для emoji-accent */
+.emoji-accent {
+  font-size: 20px;
+  display: inline-block;
+  filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.5));
+  animation: sparkle 2s infinite linear;
+}
+
+@keyframes sparkle {
+  0%, 100% { opacity: 1; transform: scale(1) rotate(0deg); }
+  25% { opacity: 0.8; transform: scale(1.2) rotate(15deg); }
+  50% { opacity: 1; transform: scale(1) rotate(0deg); }
+  75% { opacity: 0.8; transform: scale(1.2) rotate(-15deg); }
+}
+
+/* Улучшаю анимацию для signature */
+.signature-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding: 0 15px;
+  margin-top: 15px;
+  position: relative;
+  animation: floatSignature 5s ease-in-out infinite alternate;
+}
+
+@keyframes floatSignature {
+  0% { transform: translateY(0) rotate(0deg); }
+  100% { transform: translateY(-3px) rotate(1deg); }
+}
+
+.signature-wave {
+  margin-bottom: 10px;
+  overflow: visible;
+  animation: waveFloat 8s linear infinite;
+  filter: drop-shadow(0 2px 3px rgba(255, 20, 147, 0.3));
+}
+
+@keyframes waveFloat {
+  0% { transform: translateX(0) translateY(0); }
+  25% { transform: translateX(-10%) translateY(2px); }
+  50% { transform: translateX(-20%) translateY(-2px); }
+  75% { transform: translateX(-30%) translateY(2px); }
+  100% { transform: translateX(-40%) translateY(0); }
+}
+
+.signature-name {
+  font-family: 'Dancing Script', cursive;
+  font-size: 35px;
+  background: linear-gradient(45deg, #FF1493, #FF69B4);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  position: relative;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+  padding-right: 5px;
+  transition: all 0.3s ease;
+}
+
+.signature-name:hover {
+  transform: scale(1.1) rotate(3deg);
+  filter: drop-shadow(0 0 5px rgba(255, 20, 147, 0.5));
+}
+
+.signature-name::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #FF1493, transparent);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.5s ease;
+}
+
+.signature-name:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Стили для летающих декоративных элементов */
+.floating-elements {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.floating-star {
+  position: absolute;
+  z-index: 2;
+  filter: drop-shadow(0 0 3px rgba(255, 215, 0, 0.5));
+  opacity: 0.8;
+}
+
+.floating-star:nth-child(1) {
+  animation: float-star 7s ease-in-out infinite alternate;
+}
+
+.floating-star:nth-child(2) {
+  animation: float-star 9s ease-in-out 1s infinite alternate-reverse;
+}
+
+.floating-star:nth-child(3) {
+  animation: float-star 8s ease-in-out 2s infinite alternate;
+}
+
+@keyframes float-star {
+  0% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-15px) rotate(15deg); }
+  100% { transform: translateY(5px) rotate(-5deg); }
+}
+
+.floating-heart {
+  position: absolute;
+  z-index: 2;
+  filter: drop-shadow(0 0 3px rgba(255, 20, 147, 0.5));
+  animation: float-heart 6s ease-in-out infinite alternate;
+  opacity: 0.8;
+}
+
+@keyframes float-heart {
+  0% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-10px) scale(1.1); }
+  100% { transform: translateY(5px) scale(0.95); }
+}
+
+.floating-circle {
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,105,180,0.6) 0%, rgba(255,105,180,0) 70%);
+  z-index: 2;
+  animation: float-circle 10s ease-in-out infinite alternate;
+  opacity: 0.5;
+  filter: blur(1px);
+}
+
+.floating-circle.small {
+  width: 15px;
+  height: 15px;
+  background: radial-gradient(circle, rgba(135,206,250,0.6) 0%, rgba(135,206,250,0) 70%);
+  animation: float-circle 8s ease-in-out 2s infinite alternate-reverse;
+}
+
+@keyframes float-circle {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(10px, -10px); }
+  50% { transform: translate(-5px, -20px); }
+  75% { transform: translate(-15px, -5px); }
+  100% { transform: translate(5px, 10px); }
+}
+
+/* Добавляем эффект блеска для элементов при наведении на карточку */
+.message-card:hover ~ .floating-elements .floating-star,
+.message-card:hover ~ .floating-elements .floating-heart {
+  filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.8));
+  transition: filter 0.5s ease;
+}
+
+.message-card:hover ~ .floating-elements .floating-circle {
+  opacity: 0.8;
+  filter: blur(0.5px);
+  transition: all 0.5s ease;
+}
